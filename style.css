@@ -1,0 +1,35 @@
+
+body{
+    font-family: 'Roboto', sans-serif;
+    color: darkblue;
+    background-color: whitesmoke;
+    margin: 10%;
+}
+
+h1{
+    color: black;
+    font-size: 2.5
+}
+
+p{
+    color: black;
+    
+}
+
+#footer{
+    color: brown;
+    margin: auto;
+}
+
+nav ul li a{
+    color: crimson;
+    
+    
+}
+
+nav li{
+    display: inline-block;
+    list-style-type: none;
+    margin-right:60px;
+}
+    
