@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    
+    <meta charset="UTF-8">
+    <title>Logo</title>
+    <link href="../style.css" rel="stylesheet" type="text/css" >
+
+    
+</head>
+
+<body>
+   <div id="container">
+       
+       <h2>Logo</h2>
+       
+   </div>
+   
+    <script src="../p5.min.js"> </script>
+    
+    <script src="sketch.js"> </script>
+</body>
+</html>
+//logo
+function setup(){
+    createCanvas(700, 480);
+    background(225, 185, 169);
+    
+    
+   //logo 
+   noFill();
+    strokeWeight(2);
+    stroke("white");
+    
+   triangle(30, 75, 58, 20, 86, 75);
+    triangle(75, 86, 20, 58, 75,30);
+    
+    // ts means text size
+    var ts = 70;
+    var lineNumber = 1;
+    
+    
+    textSize(ts);
+    textFont("Georgia");
+    textAlign(CENTER);
+    
+    //rect (320, 240, 70, 12);
+    
+    var y = 300;
+    var x = 300;
+    
+    fill(240, 75, 7);
+    strokeWeight(6);
+    stroke("white");
+    textStyle("Italics");
+    text("Creative ", x + 18, y + ts*lineNumber);
+    lineNumber = lineNumber ;
+    text("Rawr", x, y, +ts*lineNumber);
+    lineNumber = lineNumber + 1;
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+}
