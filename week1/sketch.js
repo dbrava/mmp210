@@ -14,7 +14,9 @@ function setup(){
     fill('white');
     ellipse(290, 220, 20, 20);
     ellipse(210, 220, 20, 20);
-    
+
+
+
     ellipse(250, 240, 10, 10);
     
     fill('red');
@@ -25,10 +27,13 @@ function setup(){
     stroke(200, 0, 100);
    
     
+    fill('black');
+    stroke("black");
+    arc(320, 150, 60, 60, 0, PI, OPEN);
+
+    arc(150, 150, 60, 60, 0, PI, OPEN);
+
    
-    
-    fill("#f4d85d");
-    rect(0, 280, 640, 240);
     
   
     

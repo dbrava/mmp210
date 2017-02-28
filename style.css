@@ -1,7 +1,7 @@
 
 body{
     font-family: 'Roboto', sans-serif;
-    color: darkblue;
+    color: black;
     background-color: whitesmoke;
     margin: 10%;
 }
@@ -18,18 +18,24 @@ p{
 
 #footer{
     color: brown;
-    margin: auto;
+    margin: 0, auto;
 }
 
 nav ul li a{
-    color: crimson;
-    
+    color: darkslateblue;
+    text-decoration: none;
+
+  
     
 }
+
+a:hover {
+    background-color: deeppink;
 
 nav li{
     display: inline-block;
     list-style-type: none;
     margin-right:60px;
+   
 }
     
