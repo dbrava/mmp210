@@ -30,12 +30,17 @@ function setup(){
     fill(lens);
     rect(170, 100, 60, 30);
 	
+    
+    var lensX = 400;
+    var lensY = 350;
+   
+    
     //lens
     fill(black);
-    ellipse(400, 350, 155, 155);
+    ellipse(lensX, lensY, 150, 150);
      
     //lens4
     fill(lens);
-    ellipse(400, 350, 120, 120);
+    ellipse(lensX, lensY, 120, 120);
 
 }

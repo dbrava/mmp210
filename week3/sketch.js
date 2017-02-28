@@ -1,13 +1,27 @@
 //logo
 function setup(){
     createCanvas(700, 480);
-    background(225, 185, 169);
+    background(160, 248, 230);
     
     
    //logo 
    noFill();
     strokeWeight(2);
-    stroke("white");
+    stroke("black");
+    
+    //vertex
+    var w = 257.5;
+    
+    
+    
+    beginShape(TRIANGLE_FAN);
+vertex(w, 250);
+vertex(w, 215);
+vertex(292, 250);
+vertex(w, 285);
+vertex(222, 250);
+vertex(w, 215);
+endShape();
     
    
     // ts means text size
