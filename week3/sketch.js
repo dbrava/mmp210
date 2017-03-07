@@ -1,6 +1,6 @@
 //logo
 function setup(){
-    createCanvas(700, 480);
+    createCanvas(600, 500);
     background(160, 248, 230);
     
     
@@ -15,7 +15,7 @@ function setup(){
     
     
     beginShape(TRIANGLE_FAN);
-vertex(w, 250);
+vertex(w, 300);
 vertex(w, 215);
 vertex(292, 250);
 vertex(w, 285);
@@ -35,7 +35,7 @@ endShape();
     
     //rect (320, 240, 70, 12);
     
-    var y = 300;
+    var y = 200;
     var x = 300;
     
     fill(240, 75, 7);
