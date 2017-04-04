@@ -7,14 +7,22 @@ var a1 = 350;
 var a = 150;
 var rot = 0;
 
+var r, g, b;
+
 function setup(){
     createCanvas(640, 480);
+	//random colors
+	r = random(255);
+  	g = random(255);
+  	b = random(255);
 }
 
 function draw() {   
     background('lightblue');
+	
     
-    fill('white');
+	
+	fill(r, g, b);
 	stroke("black");
 
 	
@@ -69,12 +77,20 @@ function draw() {
 
     ellipse(10, 10, 20, 20);
 	pop();
-   
-
 }
 
+function mousePressed() {
+ 
+// Check if mouse is inside the circle
+  var d = dist(mouseX, mouseY, 360, 200);
+  if (d < 100) {
+    // Pick new random color values
+    r = random(255);
+    g = random(255);
+    b = random(255);
+  }
     
-    
+}
     
 
 

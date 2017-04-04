@@ -23,20 +23,16 @@ footer{
 
 nav ul li a{
     color: darkslateblue;
-    text-decoration: none;
-
+	text-decoration: none;
   
-    
+}
+
+ul{
+	list-style-type: none;
 }
 
 a:hover {
     background-color: deeppink;
 
-nav li{
-    display: inline-block;
-    text-decoration: none;
-    list-style-type: none;
-    margin-right:60px;
-   
 }
     
