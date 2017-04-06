@@ -81,7 +81,6 @@ var Trim = color(237,235,216);// window trim
    rect(x, y, windowWidth/2, windowHeight/4);      
  }
    }
-}
 
 function drawWindow(x,y,windowWidth,windowHeight){
    fill("Trim");
