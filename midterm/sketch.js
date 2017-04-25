@@ -1,22 +1,22 @@
 // midterm - generative pattern
-
 function setup() {
-    createCanvas(800, 600);
-    background(255);
+    createCanvas(600,400);
+    stroke('green');
+    y = height * 0.5;
     
-   noStroke();
-    
-    var numberOfDots = 900;
-    var columns = Math.sqrt(numberOfDots);
-    var rows = Math.sqrt(numberOfDots);
-    
-//    var rows = 5;
-//    var columns = numberOfDots / rows;
-    
-    var w = width / columns;
+}
+
+var rr = 6;
+var d = 10;
+var x = 10;
+var r = 225, g = 200, b = 100;
+var numberOfDots = 100;
+var columns = Math.sqrt(numberOfDots);
+var rows = Math.sqrt(numberOfDots);
+var w = width / columns;
     var h = height / rows;
 
-    for (var x = 0; x <= width; x += w) {
+for (var x = 0; x <= width; x += w) {
         for (var y = 0; y <= height; y += h) {
             
             var r, g, b;
@@ -24,36 +24,10 @@ function setup() {
             var tempW = w;
             var tempH = h;
             
-            // rain
-            if (y < height/2) {
-                // random rain blue color
-                r = random(0, 50);
-                g = random(150, 255);
-                b = random(200, 255);
-                //random rain size and position
-                x += random(-25, 25);
-                w = random(100, 20);
-            } else if (y > height * 3/4) {
-                // random flower color
-                r = random(200, 255);
-                g = random(0, 100);
-                b = random(100, 200);
-                // random flower size
-                w = h = random(10, 40);
-            } else {
-                // random green grass color
-                r = random(0, 50);
-                g = random(150, 255);
-                b = random(0, 100);
-            }
-            
-            // all of the color fills
-            fill(r, g, b);            
-            
+
             // flowers
             if ( y > height * 3/4) {
-                // flowers
-				
+                //dots
                 ellipse(x, y, w, h);
                 //stems
                 fill(
@@ -61,29 +35,71 @@ function setup() {
                     random(150, 255),
                     random(0, 100)
                 );
-               
-				ellipse(x, 46, 20, 20);
+                rect(x, y, w/8, h);
                 //inside 
-                
-				fill(
-                    random(0, 25),
+                fill(
+                    random(0, 255),
                     random(0, 100),
                     random(100, 200)
                 );
                 ellipse(x, y, w/2, h/2);
             } else {
                 // rain & grass
-              
-				stroke("black");
-				point(300, 200);
-				
+                rect(x, y, w, h);
             }
-			//waves
-			
-        
+            
             x = tempX;
             w = tempW;
             h = tempH;
         }
     }
+
+
+
+
+function draw() {
+    background('white');
+    textSize(40);
+    textFont("Arial");
+    
+    if(y > 5){
+        r = random(0, 255);
+        g = random(0, 255);
+        b = random(0, 255);
+    }
+    fill(r, g, b);
+    text("Morse Code", 50, 50);
+    
+    
+    
+  y = y - 4;
+  if (y < 0) {
+    y = height;
+  }
+   
+    //dots
+    ellipse(x, y, d, d);
+    ellipse(x+50, y, d, d);
+    ellipse(x+100, y, w, h);
+    ellipse(x, y/2, d, d);
+	ellipse(x+ 700, y/5, d, d);
+    ellipse(x+500, y, d, d);
+    ellipse(x+700, y, d, d);
+      
+    //dash
+    rect(x+10, y, 25, rr);
+    rect(x+40, y+30, 25, rr);
+    rect(x+ 100, y+30, 25, rr);
+    rect(x+120, y+50, 25, rr);
+    rect(x+300, y+50, 25, rr);
+	rect(x+500, y+200, 25, rr);
 }
+
+if (x > 200) {
+	x = width;
+	
+	
+}
+ 
+
+
