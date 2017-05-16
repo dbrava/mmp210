@@ -10,22 +10,22 @@ function setup(){
     stroke("black");
     
     //vertex
-    var w = 257.5;
+    var w = 500;
     
     
     
     beginShape(TRIANGLE_FAN);
-vertex(w, 300);
+vertex(w, 500);
 vertex(w, 215);
-vertex(292, 250);
-vertex(w, 285);
-vertex(222, 250);
+vertex(500, 400);
+vertex(w, 400);
+vertex(100, 300);
 vertex(w, 215);
 endShape();
     
    
     // ts means text size
-    var ts = 70;
+    var ts = 140;
     var lineNumber = 1;
     
     
@@ -42,9 +42,9 @@ endShape();
     strokeWeight(6);
     stroke("white");
     textStyle("Italics");
-    text("C", x + 18, y + ts*lineNumber);
+    text("Creative", x, y + ts*lineNumber);
     lineNumber = lineNumber ;
-    text("R", x + 18, y, +ts*lineNumber);
+    text("Rawr", width/2, y, +ts*lineNumber);
     lineNumber = lineNumber + 1;
     
 }
