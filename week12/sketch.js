@@ -1,100 +1,153 @@
+//Final Project
 
-//final
-var img;
-var w = 200, h = 100;
-var bg;
-var numSpaceships = 13;
-var spaceships = [];
-var displayShips = true;
- 
-function setup() { 
-    createCanvas(800, 600);
-	img = loadImage("bee.png");
-	bg = loadImage("bg.png");
-	
-    for (var i = 0; i < numSpaceships; i++) {
-        spaceships.push( new Spaceship(
-            random(0,width), 
-            random(0,height) 
-        ) );   
-    }
+
+
+var bkgMusic;
+var canvasWidth = 600;
+var canvasHeight = 400;
+var score = 0;
+var player = {
+	color : "#FFF",
+	x : 280,
+	width : 40,
+	y : 355,
+	height: 40,
+	draw : function(){
+		image(img_player, 
+              this.x, 
+              this.y, 
+              this.width, 
+              this.height);
+	}
 }
 
-function draw() {
-	image(img, 0, 0);
-    background(bg);
-    for (var i = 0; i < numSpaceships; i++) {
-        if (spaceships[i].alive) {
-            spaceships[i].display();
-            spaceships[i].update();
-        } else {
-            spaceships[i].explode();
-        }
-    }
+var bullets = [];
+function Bullet(I){
+	I.active = true;
+	I.x = player.x + player.width/2;
+	I.y = player.y +  player.height/2;
+	I.width = 10;
+	I.height = 10;
+	I.yVelocity = 3;
+	I.inBounds = function(){
+		return I.x >= 0 && I.y >= 0 && I.x < canvasWidth - I.width && I.y < canvasHeight - I.height;
+	}
+	I.update = function(){
+		I.active  = I.active && I.inBounds();
+		I.y -= I.yVelocity;
+	}
+	I.draw = function(){
+		image(img_bullet, I.x, I.y, I.width, I.height);
+	}
+	return I;
 }
 
-function mousePressed() {
-    //displayShips = !displayShips;
-    for (var i = 0; i < numSpaceships; i++) {
-        spaceships[i].collide(mouseX, mouseY);
-    }
-}
-
-function Spaceship(x, y) {
-    this.color = color(random(0,255), random(0,255), random(0, 255));
-    this.size = random(40, 100);
-    this.speed = random(1,3);
-    this.x = x;
-    this.y = y;
-    this.alive = true;
-    this.display = function() {
-        fill(this.color);
-        ship(this.x, this.y, this.size);
-        // collider
-//        noFill();
-//        stroke(0,255,0);
-//        ellipse(this.x + this.size/2, this.y, this.size/2);
-//        noStroke();
-    }
-    this.explode = function() {
-        fill("red");
-        ellipse(this.x + this.size/2, this.y, random(10, 50));
-    }
-    this.update = function() {
-        if (this.x < width + this.size) {
-            this.x += this.speed;
-        } else {
-            this.x = -this.size;
-            this.y = random(0, height);
-        }
-    }
-    this.collide = function(otherX, otherY) {
-        var d = dist(otherX, otherY, this.x + this.size/2, this.y);
-        if (d < this.size/2) {
-            this.alive = false;
-        }
-    }
+var enemies  = [];
+function Enemy(I){
+	I.active = true;
+	I.x = Math.random() * canvasWidth;
+	I.y = 0;
+	I.width = 30;
+	I.height = 30;
+	I.yVelocity = 2;
+	I.inBounds = function(){
+		return I.x >= 0 && I.y >= 0 && I.x < canvasWidth - I.width && I.y < canvasHeight - I.height;
+	}
+	I.draw = function(){
+		image(img_enemy, I.x, I.y, I.width, I.height);
+	}
+	I.update= function(){
+		I.active = I.active && I.inBounds();
+		I.y += I.yVelocity;
+	}
+	return I;
 }
 
 
-function ship(x, y, spaceshipWidth) {
-    var spaceshipHeight = spaceshipWidth/4;
-    var spaceshipWing = spaceshipWidth/3;
-    var wingMargin = spaceshipWidth/10;
-    var cockpitWidth = spaceshipWidth/3;
-        
-    // wing 1
-    triangle(x, y - spaceshipWing, x, y + spaceshipHeight + spaceshipWing, x + spaceshipWidth, y + spaceshipHeight/2);
+function collision(enemy, bullet){
+	return bullet.x + bullet.width >= enemy.x && bullet.x < enemy.x + enemy.width &&
+			bullet.y + bullet.height >= enemy.y && bullet.y < enemy.y + enemy.height;
+}
+//canvas functions 
+var img_enemy, img_player, img_bullet;
+function preload(){
     
-    // wing 2
-    triangle(x + wingMargin, y - spaceshipWing + wingMargin/2, x + wingMargin, y + spaceshipHeight + spaceshipWing - wingMargin/2, x + spaceshipWidth, y + spaceshipHeight/2);
+	img_enemy = loadImage("images/enemy2.png");
+	img_player = loadImage("images/bee.png");
+	img_bullet = loadImage("images/bullet.png");
+    img_background = loadImage("images/bg2.png");
+    bkgMusic = loadSound("music.mp3");
     
-    // body
-    rect(x, y, spaceshipWidth, spaceshipHeight);
-    
-    // cockpit
-    triangle(x + spaceshipWidth, y, x + spaceshipWidth, y + spaceshipHeight, x + spaceshipWidth + cockpitWidth, y + spaceshipHeight/2);
-    
-    // window 
-    ellipse(x + spaceshipWidth + cockpitWidth/4, y + spaceshipHeight/4, spaceshipHeight/2);
+    }
+
+function setup(){
+	createCanvas(canvasWidth, canvasHeight);
+	noCursor();
+    bkgMusic.play();
+}
+function draw(){
+	fill(255);
+	clear();
+	background(img_background);
+	text("score : " + score, 10, 10);
+	fill(player.color);
+	if(keyIsDown(LEFT_ARROW)){
+		if(player.x-5 >= 0)
+			player.x -= 5;
+		else
+			player.x = 0;
+	}
+	if(keyIsDown(RIGHT_ARROW)){
+		if(player.x + 5 <= canvasWidth-player.width)
+			player.x += 5;
+		else
+			player.x = canvasWidth - player.width;
+	}
+	if(keyIsDown(32)){
+		bullets.push(Bullet({}));
+	}
+	player.draw();
+
+
+	bullets = bullets.filter(function(bullet){
+		return bullet.active;
+	});
+	bullets.forEach(function(bullet){
+		bullet.update();
+		bullet.draw();
+	});
+
+	if(Math.random()<0.05){
+		enemies.push(Enemy({}));
+	}
+	enemies = enemies.filter(function(enemy){
+		return enemy.active;
+	});
+	enemies.forEach(function(enemy){
+		enemy.update();
+		enemy.draw();
+	});
+
+	bullets.forEach(function(bullet){
+		enemies.forEach(function(enemy){
+			if(collision(enemy, bullet)){
+				enemy.active = false;
+				bullet.active = false;
+				score++;
+			}
+		});
+	});
+
+	enemies.forEach(function(enemy){
+		if(collision(enemy, player)){
+			enemy.active = false;
+			noLoop();
+            stroke('black'); 
+            fill('black');
+			textSize(40);
+			text("GAME OVER", 180, 200);
+            
+            
+		}
+	});
 }
